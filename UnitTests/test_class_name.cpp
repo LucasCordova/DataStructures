@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "CppUnitTest.h"
 
-#include "crt_check_memory.h"
+#include "crt_check_memory.hpp"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
