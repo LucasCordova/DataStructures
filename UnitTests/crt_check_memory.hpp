@@ -23,10 +23,15 @@ namespace unit_tests
 		~crt_check_memory()
 		{
 			_CrtMemCheckpoint(&state2);
-			Assert::AreEqual(0, _CrtMemDifference(&state3, &state1, &state2));
 
-			if (_CrtMemDifference(&state3, &state1, &state2))
+			if (_CrtMemDifference(&state3, &state1, &state2) != 0)
+			{
 				_CrtMemDumpStatistics(&state3);
+				_CrtSetReportMode(_CRT_WARN, _CRTDBG_MODE_FILE);
+				_CrtSetReportFile(_CRT_WARN, _CRTDBG_FILE_STDOUT);
+				_CrtDumpMemoryLeaks();
+				Assert::Fail(L"Detected memory leaks!");
+			}
 		}
 	};
 }
